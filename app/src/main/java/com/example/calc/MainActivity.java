@@ -9,8 +9,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
     EditText te;
-    double cur = 0, last;
-    boolean first = true;
+    double cur = 0, last = 0;
+    boolean first = true, none = true;
     String lastmark;
 
     @Override
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         lastmark = "+";
         te.setText("");
         te.setHint(String.valueOf(cur));
-        last = cur;
+        none  = false;
     }
 
     public void sub(View view) {
@@ -51,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
         lastmark = "-";
         te.setText("");
         te.setHint(String.valueOf(cur));
-        last = cur;
+        none = false;
+
     }
 
     public void mul(View view) {
@@ -68,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
         lastmark = "*";
         te.setText("");
         te.setHint(String.valueOf(cur));
-        last = cur;
+        none = false;
+
     }
 
     public void div(View view) {
@@ -85,13 +87,15 @@ public class MainActivity extends AppCompatActivity {
         lastmark = "/";
         te.setText("");
         te.setHint(String.valueOf(cur));
-        last = cur;
+        none = false;
+
     }
 
     public void clear(View view) {
         cur = 0;
         te.setText("");
         te.setHint("num input");
+        lastmark = "";
         first = true;
     }
 
@@ -109,12 +113,14 @@ public class MainActivity extends AppCompatActivity {
         last = cur;
         first = true;
         te.setHint("num input, "+ String.valueOf(cur));
+        none = false;
 
     }
 
     public void credits(View view) {
         Intent si = new Intent(this,lastres.class);
         si.putExtra("res",last);
+        si.putExtra("bo", none);
         startActivity(si);
     }
 }
